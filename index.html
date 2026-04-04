@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azure Cloud Security Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="dashboard-bg"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true"></span>
+      <div>
+        <h1>Azure Cloud Security Dashboard</h1>
+        <p class="subtitle">Infrastructure security monitoring (simulated)</p>
+      </div>
+    </div>
+    <div class="status-pill safe" id="globalStatus">
+      <span class="pulse"></span>
+      Ready to scan
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel scan-panel">
+      <h2>Security scan</h2>
+      <button type="button" id="runScanBtn" class="btn-primary">
+        Run Cloud Security Scan
+      </button>
+
+      <div id="scanLoading" class="scan-loading hidden" aria-live="polite">
+        <p class="scan-message">Scanning Azure cloud resources...</p>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div id="scanResults" class="scan-results hidden">
+        <div class="metrics">
+          <div class="metric-card">
+            <span class="metric-label">Security score</span>
+            <span class="metric-value safe" id="securityScore">—</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Detected vulnerabilities</span>
+            <span class="metric-value vuln" id="vulnCount">—</span>
+          </div>
+        </div>
+
+        <h3 class="section-title">Findings</h3>
+        <ul class="vuln-list" id="vulnList"></ul>
+      </div>
+    </section>
+
+    <section class="panel log-panel">
+      <h2>Cloud Log Analyzer</h2>
+      <p class="panel-desc">Sample activity logs — suspicious entries are highlighted.</p>
+      <div class="log-toolbar">
+        <span class="legend"><span class="dot safe"></span> Safe</span>
+        <span class="legend"><span class="dot warn"></span> Warning</span>
+        <span class="legend"><span class="dot vuln"></span> Vulnerability</span>
+      </div>
+      <div class="log-viewport" id="logViewport"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
